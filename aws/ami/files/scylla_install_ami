@@ -76,8 +76,6 @@ if __name__ == '__main__':
     if args.repo_for_update:
         run('curl -L -o /etc/yum.repos.d/scylla.repo {REPO_FOR_UPDATE}'.format(REPO_FOR_UPDATE=args.repo_for_update))
 
-    run('systemctl daemon-reload')
-    run('systemctl enable scylla-image-setup.service')
     with open('/etc/cloud/cloud.cfg') as f:
         lines = f.readlines()
     with open('/etc/cloud/cloud.cfg', 'w') as f:
@@ -99,3 +97,5 @@ if __name__ == '__main__':
     with open('/etc/cloud/cloud.cfg', 'w') as f:
         f.write(cfg2)
     shutil.move('{}/99_user_alias.cfg'.format(homedir), '/etc/cloud/cloud.cfg.d')
+    run('systemctl daemon-reload')
+    run('systemctl enable scylla-image-setup.service')

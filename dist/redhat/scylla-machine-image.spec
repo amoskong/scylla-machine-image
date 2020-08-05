@@ -49,9 +49,6 @@ install -m755 %{cloud_provider}/.bash_profile $RPM_BUILD_ROOT/home/centos
 /usr/sbin/groupadd scylla 2> /dev/null || :
 /usr/sbin/useradd -g scylla -s /sbin/nologin -r -d ${_sharedstatedir}/scylla scylla 2> /dev/null || :
 
-%post
-%systemd_post scylla-image-setup.service
-
 %preun
 %systemd_preun scylla-image-setup.service
 
